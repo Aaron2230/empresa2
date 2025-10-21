@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de camisetas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f2045;
+      color: white;
+      text-align: center;
+    }
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    .item {
+      background: #1e3c72;
+      padding: 10px;
+      border-radius: 10px;
+      width: 200px;
+    }
+    .item img {
+      width: 100%;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: yellow;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #carrito {
+      margin-top: 30px;
+      background: #162447;
+      padding: 15px;
+      border-radius: 10px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #carrito ul {
+      list-style: none;
+      padding: 0;
+    }
+    #carrito li {
+      background: #1b1b2f;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Menú de Camisetas</h1>
+
+  <div class="menu">
+    <div class="item">
+      <img src="arsenal.jpg" alt="Arsenal">
+      <p>Remera Arsenal Nº001</p>
+      <button onclick="agregarAlCarrito('Remera Arsenal Nº001')">Agregar</button>
+    </div>
+
+    <div class="item">
+      <img src="juventus.jpg" alt="Juventus">
+      <p>Remera Juventus Nº002</p>
+      <button onclick="agregarAlCarrito('Remera Juventus Nº002')">Agregar</button>
+    </div>
+
+    <div class="item">
+      <img src="city.jpg" alt="Manchester City">
+      <p>Remera City Nº003</p>
+      <button onclick="agregarAlCarrito('Remera City Nº003')">Agregar</button>
+    </div>
+
+    <div class="item">
+      <img src="psg.jpg" alt="PSG">
+      <p>Remera PSG Nº004</p>
+      <button onclick="agregarAlCarrito('Remera PSG Nº004')">Agregar</button>
+    </div>
+  </div>
+
+  <div id="carrito">
+    <h2>🛒 Carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <button onclick="finalizarCompra()">✅ Finalizar compra</button>
+  </div>
+
+  <script>
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    function agregarAlCarrito(producto) {
+      carrito.push(producto);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      mostrarCarrito();
+    }
+
+    function mostrarCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      lista.innerHTML = "";
+      carrito.forEach((item) => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        lista.appendChild(li);
+      });
+    }
+
+    function finalizarCompra() {
+      alert("✅ Gracias por tu compra!");
+      carrito = [];
+      localStorage.removeItem("carrito");
+      mostrarCarrito();
+    }
+
+    // Mostrar carrito guardado al cargar la página
+    mostrarCarrito();
+  </script>
+
+</body>
+</html>

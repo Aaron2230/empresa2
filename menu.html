@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de camisetas</title>
+  <link rel="stylesheet" href="assent/stye.css">
+</head>
+<body>
+    <div class="contenedor_princ">
+        <div class="menu-lateral">
+            <a href="index.html">Inicio</a>
+            <a href="menu.html">Menú</a>
+            <a href="pedidos.html">Pedidos</a>
+            <a href="sobremi.html">Sobre mí</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+        <div>
+            <h1>Menú de Camisetas</h1>
+
+  <div class="menu">
+    <div class="item">
+      <img src="Imagenes /Arsenal.jpg" alt="Arsenal">
+      <p>Remera Arsenal Nº001</p>
+      <button onclick="agregarAlCarrito('Remera Arsenal Nº001')">Agregar</button>
+    </div>
+
+    <div class="item">
+      <img src="Imagenes /juventus.jpg" alt="Juventus">
+      <p>Remera Juventus Nº002</p>
+      <button onclick="agregarAlCarrito('Remera Juventus Nº002')">Agregar</button>
+    </div>
+
+    <div class="item">
+      <img src="Imagenes /city.jpg" alt="Manchester City">
+      <p>Remera City Nº003</p>
+      <button onclick="agregarAlCarrito('Remera City Nº003')">Agregar</button>
+    </div>
+
+    <div class="item">
+      <img src="Imagenes /PSG.jpg" alt="PSG">
+      <p>Remera PSG Nº004</p>
+      <button onclick="agregarAlCarrito('Remera PSG Nº004')">Agregar</button>
+    </div>
+  </div>
+
+  <div id="carrito">
+    <h2>🛒 Carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <button onclick="finalizarCompra()">Finalizar compra</button>
+  </div>
+  <script>
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    function agregarAlCarrito(producto) {
+      carrito.push(producto);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      mostrarCarrito();
+    }
+    function mostrarCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      lista.innerHTML = "";
+      carrito.forEach((item) => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        lista.appendChild(li);
+      });
+    }
+    function finalizarCompra() {
+      alert(" Gracias por tu compra-para finalizar tu compra comunicate al 3564-666310");
+      carrito = [];
+      localStorage.removeItem("carrito");
+      mostrarCarrito();
+    }
+
+    // Mostrar carrito guardado al cargar la página
+    mostrarCarrito();
+  </script>
+
+</body>
+</html>
